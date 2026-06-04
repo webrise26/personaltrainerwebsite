@@ -1,0 +1,48 @@
+# ═══════════════════════════════════════════════════
+#  HTTP SECURITY HEADERS — Netlify
+#  Federico Guerreschi PT — federicoguerreschi.it
+# ═══════════════════════════════════════════════════
+
+/*
+  # ── HSTS: forza HTTPS per 1 anno, includi sottodomini, invia a preload list ──
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+  # ── Impedisce clickjacking (embedding in iframe) ──
+  X-Frame-Options: DENY
+
+  # ── Impedisce MIME sniffing ──
+  X-Content-Type-Options: nosniff
+
+  # ── Controlla le info nel Referer header ──
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # ── Disabilita funzionalità browser non necessarie ──
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), interest-cohort=()
+
+  # ── XSS Protection (legacy browser fallback) ──
+  X-XSS-Protection: 1; mode=block
+
+  # ── Content Security Policy ──
+  # Aggiusta src se usi Google Analytics, Formspree, ecc.
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://formspree.io;
+
+  # ── Cache control per asset statici ──
+  Cache-Control: public, max-age=0, must-revalidate
+
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
